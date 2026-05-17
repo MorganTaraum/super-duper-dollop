@@ -203,7 +203,7 @@ Well, follow the thing, espeically the docs. KIV
 
 Windows Activation
 ```powershell
-irm https://get.activated.win | iex
+
 ```
 
 For Microsoft Office, get the 2010 version at https://massgrave.dev/office_msi_links
