@@ -65,6 +65,10 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 # DELETE ONE DRIVE
 .\remove-onedrive.ps1
 
+# Delete the debloat zip and folder after you're done
+Remove-Item -Path "C:\debloat.zip" -Force
+Remove-Item -Path "C:\debloat" -Recurse -Force
+
 # ── AutoLogon ───────────────────────────────────────────────────────────────────────
 # Change the <USERNAME> and <PASSWORD> value
 # reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d <USERNAME> /f
