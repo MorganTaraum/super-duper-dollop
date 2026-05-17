@@ -1,5 +1,3 @@
-# Installation I went through for CAPE sandbox
-
 # Hardware Requirements
 
 Platform (Change to Mac if you are on Mac)
@@ -203,10 +201,8 @@ Well, follow the thing, espeically the docs. KIV
 
 Windows Activation
 ```powershell
-
+irm https://get.activated.win | iex
 ```
-
-For Microsoft Office, get the 2010 version at https://massgrave.dev/office_msi_links
 
 Remeber to take snapshots beofre doing these next steps. Just in case ;)
 
@@ -218,14 +214,26 @@ Then open with Powershell as Admin
 
 Use win10_reduce_noise.ps1 to reduce the noise in windows 10 VM. This is just a converted version of [disable_win7noise.bat](https://github.com/kevoreilly/CAPEv2/blob/master/installer/disable_win7noise.bat) from CAPE one. 
 
+(Script include debloater from [w4rh4wk](https://github.com/w4rh4wk/debloat-windows-10). So be aware and maybe read the script if you want)
+
+### Unharden Office 2010
+
+For Microsoft Office installation, get the 2010 version at https://massgrave.dev/office_msi_links
 
 To deharden Office 2010. Use the Office-2010-Unhardening.ps1 script. Be sure to run as Powershell Admin!
 
+### Adobe Acrobat Installation
+
+Download the installer https://get.adobe.com/uk/reader/ and install as usual.
+
+But make sure to install the 2 bloatware that comese with it,
+1. Adobe Photo Express
+2. Mcafee Thing
 
 ### Install Sysmon
 
 ```powershell
-# 7. Install Sysmon with Olafhartong sysmonconfig-with-filedelete config 
+# Install Sysmon with Olafhartong sysmonconfig-with-filedelete config 
 # Download Sysmon
 Invoke-WebRequest -Uri "https://download.sysinternals.com/files/Sysmon.zip" -OutFile "C:\Sysmon.zip"
 Expand-Archive -Path "C:\Sysmon.zip" -DestinationPath "C:\Sysmon"
@@ -234,6 +242,10 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/olafhartong/sysmon-mod
 
 # Install Sysmon with config
 C:\Sysmon\Sysmon64.exe -accepteula -i C:\Sysmon\sysmonconfig.xml
+
+# Delete Sysmon installer after install
+Remove-Item -Path "C:\Sysmon.zip" -Force
+Remove-Item -Path "C:\Sysmon" -Recurse -Force
 ```
 
 ### Agent Installation and Configure Startup
@@ -241,7 +253,9 @@ C:\Sysmon\Sysmon64.exe -accepteula -i C:\Sysmon\sysmonconfig.xml
 Install Python (Version Python versions > 3.10 and < 3.13 are preferred.)
 ```powershell
 # https://www.python.org/ftp/python/3.12.10/python-3.12.10.exe
+iwr https://www.python.org/ftp/python/3.12.10/python-3.12.10.exe -o C:\python-3.12.10.exe
 
+# Install it as usual
 # Make sure to check the "Add python.exe to PATH" during installation
 
 # Check if there is error or not
@@ -292,4 +306,3 @@ If it is the same, it should be working
 
 # References
 https://endsec.au/blog/building-an-automated-malware-sandbox-using-cape/#:~:text=CAPE%20Sandbox%20supports%20a%20variety,VMware%20Fusion%20Pro%2C%20or%20VirtualBox.
-https://capev2.readthedocs.io/en/latest
